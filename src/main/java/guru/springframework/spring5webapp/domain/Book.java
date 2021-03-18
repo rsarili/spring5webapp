@@ -7,6 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -20,16 +21,15 @@ public class Book {
     @ManyToMany
     @JoinTable(name = "author_book",
         joinColumns = @JoinColumn(name = "book_id"),
-        inverseJoinColumns = @JoinColumn("author_id"))
-    private Set<Author> authors;
+        inverseJoinColumns = @JoinColumn(name = "author_id"))
+    private Set<Author> authors = new HashSet<>();
 
     public Book() {
     }
 
-    public Book(final String title, final String isbn, final Set<Author> authors) {
+    public Book(final String title, final String isbn) {
         this.title = title;
         this.isbn = isbn;
-        this.authors = authors;
     }
 
     public Long getId() {
